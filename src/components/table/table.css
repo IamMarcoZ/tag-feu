@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid black !important;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-size: small;
+    max-width: 150px !important;
+}
+
+td{
+    width: 180px !important;
+}
+
+.td-btn{
+    width: 50px !important;
+}
+
+.small-td {
+    width: 170px !important;
+}
+
+.small-input{
+    width: 100% !important;
+}
