@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Table from '../table/Table';
 import { PODLIST, HELM_PODS, OCP_PODS } from "../../utils/CONSTANTS";
 import TableForEmail from '../tableForEmail/TableForEmail';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 
 
 const Main = () => {
@@ -171,6 +173,19 @@ const Main = () => {
 
     }
 
+    function showToast(msg, severity) {
+        switch (severity) {
+            case ("OK"): toast.done(msg);
+                break;
+            case ("KO"): toast.error(msg);
+                break;
+            case ("WARNING"): toast.warn(msg);
+                break;
+            default: toast.info(msg);
+                break;
+        }
+    }
+
     function handleSubmit() {
         if (!checkIfPodIsPresent()) {
             if (isHelm) {
@@ -213,7 +228,11 @@ const Main = () => {
             }
 
         } else {
-            alert(`${tagHelm.pod} è già presente, utilizza il pulsante di modifica`)
+            if (isHelm) {
+                showToast(`${tagHelm.pod} è già presente, utilizza il pulsante di modifica`, "KO")
+            } else {
+                showToast(`${tagOcp.pod} è già presente, utilizza il pulsante di modifica`, "KO")
+            }
         }
     }
 
@@ -300,6 +319,7 @@ const Main = () => {
 
     return (
         <div className='container'>
+            <ToastContainer autoClose={2000} theme="dark" />
             <div className='row'>
                 {textareaVisible &&
                     <div className='col-12 mt-5'>
@@ -512,7 +532,9 @@ const Main = () => {
                     {!riepilogoVisibile && <>
                         <Table hemlArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e invia la mail</button></>
                     }
-                    <TableForEmail hemlTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} />
+                    {riepilogoVisibile &&
+                        <TableForEmail hemlTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} openToast={showToast} />
+                    }
                 </div>
             </div>
         </div>

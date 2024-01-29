@@ -134,7 +134,58 @@ export const HELM_PODS=[
 {pod:"X",sourceRepository:"X",pipeLineRelease:"X",upstreamDeploy:"X"},
 ]
 
-/* const mock = [
+export const OWNERS = [
+    {
+        name:"MC",
+        selected:false
+    },
+    {
+        name:"RI",
+        selected:false
+    },
+    {
+        name:"SZ",
+        selected:false
+    },
+    {
+        name:"AM",
+        selected:false
+    },
+    {
+        name:"VT",
+        selected:false
+    },
+    {
+        name:"PC",
+        selected:false
+    },
+    {
+        name:"ST",
+        selected:false
+    },
+    {
+        name:"FB",
+        selected:false
+    },
+    {
+        name:"DM",
+        selected:false
+    },
+    {
+        name:"KQ",
+        selected:false
+    },
+    {
+        name:"MDB",
+        selected:false
+    },
+    {
+        name:"DG",
+        selected:false
+    },
+]
+
+/*
 verifiche-preliminari-cdm 1.44.1 25175-25178,
 buoni-emissioni-associazioneRuoli 1.44.3 25182, 
 libretti-postvendita-configurazioneprodotto-cdm 1.44.5,
@@ -143,4 +194,4 @@ simulatore-nliquidita 1.44.0,
 conti-selezione-carta 1.44.0,
 attivazione-ccretail-cdm 1.44.3 25144,
 associazione-ruoli-pf 1.44.2 25141-25154 
-]*/
+*/

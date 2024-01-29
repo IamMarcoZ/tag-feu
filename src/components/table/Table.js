@@ -210,7 +210,7 @@ const Table = ({ hemlArray, ocpArray, removeFn, modifyTagCb }) => {
                                             <ImBin2 />
                                         </button>
                                         :
-                                        <button type="button" onClick={() => updateLine(index,false)} className="btn btn-danger">
+                                        <button type="button" onClick={() => {}} className="btn btn-danger">
                                             <MdCancel />
                                         </button>
                                     }

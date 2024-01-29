@@ -1,0 +1,14 @@
+.badge-button{
+    border:0px;
+    padding: 0;
+    margin: 2px;
+    background-color: inherit;
+}
+
+
+/* Stile di un pulsante attivo (se necessario) */
+
+
+.border-round{
+    border-radius: 50% !important;
+}
