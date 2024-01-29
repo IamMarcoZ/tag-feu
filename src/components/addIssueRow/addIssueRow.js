@@ -28,13 +28,22 @@ const AddIssueRow = ({issues, docId}) =>{
     }
 
     function onIssueChange(evt){
-        if(/[0-9]/g.test(evt.target.value)){
-            setIssueNumber(evt.target.value);
-        }
+        var value = evt.target.value;
+        value = value.replace(/[^0-9]/g, "");
+        setIssueNumber(value);
+        
     }
 
     function onPodChange(evt){
-        setPod(evt.target.value);
+        setPod(prevState => ({...prevState + evt.target.value}));
+    }
+
+    function isAggiungiDisabled(){
+        let disabled = false;
+        if(!pod || !issueNumber){
+            disabled = true;
+        }
+        return disabled
     }
 
     return (
@@ -59,7 +68,7 @@ const AddIssueRow = ({issues, docId}) =>{
                     </select>
                 </div>
                 <div className="col-3">
-                    <button type="submit" className="btn btn-success mt-3">Aggiungi</button>
+                    <button type="submit" disabled={isAggiungiDisabled()} className="btn btn-success mt-3">Aggiungi</button>
                 </div>            
             </div>
         </form>
