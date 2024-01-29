@@ -1,0 +1,8 @@
+.issue-list-container{
+    padding:30px;
+}
+
+.issue-list-container ul li{
+    list-style: none;
+    font-weight: bold;
+}

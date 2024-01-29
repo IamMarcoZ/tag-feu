@@ -1,3 +1,4 @@
+import fireDb from './firebase/connector.js';
 import './App.css';
 import AppRouter  from './components/router/router';
 
