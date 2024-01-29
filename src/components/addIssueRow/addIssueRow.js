@@ -35,7 +35,7 @@ const AddIssueRow = ({issues, docId}) =>{
     }
 
     function onPodChange(evt){
-        setPod(prevState => ({...prevState + evt.target.value}));
+        setPod(evt.target.value);
     }
 
     function isAggiungiDisabled(){
