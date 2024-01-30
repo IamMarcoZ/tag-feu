@@ -7,22 +7,16 @@ import './router.css'
 
 const RouterLayout = () => {
   return (
+    <div>
+      <Navbar className="row" bg="dark" data-bs-theme="dark">
+        <div className="col-4" >
+          <Link className="col-2" style={{borderBottom:0}} to="/">Home</Link>
+          <Link className="col-2" to="/issues">Issues</Link>
+        </div>
 
-    <div className='row'>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Nav className="me-auto">
-            <div className="row">
-                <Link to="/">Home</Link>
-                <Link to="/issues">Issues</Link>
-            </div>
-          </Nav>
-        </Container>
       </Navbar>
       <Outlet />
-
     </div>
-
   )
 };
 
