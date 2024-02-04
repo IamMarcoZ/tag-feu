@@ -12,10 +12,10 @@ const IssueViewer = ({env, releaseNumber, issues}) => {
 
     useEffect(()=>{
         
-        if(issues && issues[env]){
-            console.log("collaudo issues:", issues[env][releaseNumber.replace('.','_')][0].issues);
-            console.log("collaudo issues:", JSON.stringify(issues[env][releaseNumber.replace('.','_')][0].issues));
-            processedList = issues[env][releaseNumber.replace('.','_')][0].issues.map(
+        if(issues){
+            console.log("collaudo issues:", issues);
+            console.log("collaudo issues:", JSON.stringify(issues));
+            processedList = issues.map(
                 (issueItem) => {
                    return <li key={issueItem.issueNum}>{issueItem.issueNum} - {issueItem.pod}</li>
                 })

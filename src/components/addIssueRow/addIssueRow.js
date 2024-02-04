@@ -4,9 +4,10 @@ import { doc, updateDoc } from "firebase/firestore";
 import fireDb from "../../firebase/connector";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { dateUtility } from '../../utils/dateUtils.js'; 
 
 
-const AddIssueRow = ({ issues, docId }) => {
+const AddIssueRow = ({ env, releaseNumber, issues, docId, document}) => {
 
     const [docRef, setDocRef] = useState();
     const [issueNumber, setIssueNumber] = useState('');
@@ -21,12 +22,20 @@ const AddIssueRow = ({ issues, docId }) => {
     function onClickAddggiungi(e) {
         e.preventDefault();
         if (docId) {
-            let newArray = [...issues.collaudo["24_03"][0].issues, { issueNum: issueNumber, pod: pod }]
-            updateDoc(docRef, { 'collaudo.24_03.0.issues': newArray }, docId).then(
+            let newArray = [...issues, { issueNum: issueNumber, pod: pod }]
+            let releaseSessions = document[env][releaseNumber.replace('.','_')];
+            releaseSessions.filter((releaseItem)=>{
+                if(releaseItem.sessioneId === dateUtility.getTodaySessionId()){
+                    releaseItem.issues = newArray;
+                };
+            })
+            let releasePath = env+"."+releaseNumber.replace('.','_');
+            updateDoc(docRef, { [releasePath]: releaseSessions}, docId).then(
                 (response) => {
-                    toast.success(`Aggiunta issue ${issueNumber} su ${pod}`)
+                    alert(`Aggiunta issue ${issueNumber} su ${pod}`)
                 }
-            ).catch((err) => toast.error("Ops..c'è stato un problema"))
+            );
+            
         }
     }
 
