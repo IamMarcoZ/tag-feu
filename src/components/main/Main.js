@@ -38,30 +38,13 @@ const Main = () => {
         inputEnabled: false
     });
 
-    const HELM_POD_NAMES = HELM_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.pod);
-    const HELM_SOURCE_REPO = HELM_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.sourceRepository);
-    const HELM_PIPELINE_RELEASE = HELM_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.pipeLineRelease);
-    const HELM_UPSTREAM_DEPLOY = HELM_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.upstreamDeploy);
-
-    const OCP_POD_NAMES = OCP_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.pod);
-
-    const OCP_UPSTREAM_RELEASE = OCP_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.upstreamRelease);
-
-    const OCP_UPSTREAM_DEPLOY = OCP_PODS
-        .filter(el => PODLIST.includes(el.pod))
-        .map(el => el.upstreamDeploy);
+    const HELM_POD_NAMES = HELM_PODS.map(el => el.pod);
+    const HELM_SOURCE_REPO = HELM_PODS.map(el => el.sourceRepository);
+    const HELM_PIPELINE_RELEASE = HELM_PODS.map(el => el.pipeLineRelease);
+    const HELM_UPSTREAM_DEPLOY = HELM_PODS.map(el => el.upstreamDeploy);
+    const OCP_POD_NAMES = OCP_PODS.map(el => el.pod);
+    const OCP_UPSTREAM_RELEASE = OCP_PODS.map(el => el.upstreamRelease);
+    const OCP_UPSTREAM_DEPLOY = OCP_PODS.map(el => el.upstreamDeploy);
 
     function allFieldsValued() {
 
@@ -69,7 +52,7 @@ const Main = () => {
             let keys = Object.keys(tagHelm);
             let valid = true;
             keys.forEach((key) => {
-                if (key != "inputEnabled" && key != "notes") {
+                if (key != "inputEnabled" && key != "notes" && key != 'pipeLineMergeRequest') {
                     valid = valid && tagHelm[key].length > 0;
                 }
             })

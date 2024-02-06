@@ -8,15 +8,6 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
         closeRiepilogo();
     }
 
-    function sendEMail() {
-        let ocpTable = document.getElementById("tableOcp").outerHTML;
-        let helmTable = document.getElementById("tableHelm").outerHTML;
-        sessionStorage.setItem("table", helmTable)
-        console.log(helmTable);
-        console.log(ocpTable);
-        // sendMail("marco.cicerano@hotmail.com", helmTable);
-    }
-
     function copyToClipBoard(id) {
 
         const elTable = document.getElementById(id);
@@ -132,9 +123,6 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
 
                 <button className='btn btn-success' onClick={handleCloseRiepilogo}>
                     Chiudi
-                </button>
-                <button className='btn btn-success' onClick={sendEMail}>
-                    Invia Mail
                 </button>
             </div>
         </div>

@@ -13,7 +13,6 @@ const RouterLayout = () => {
           <Link className="col-2" style={{borderBottom:0}} to="/tag-feu">Home</Link>
           <Link className="col-2" to="/tag-feu/issues">Issues</Link>
         </div>
-
       </Navbar>
       <Outlet />
     </div>
