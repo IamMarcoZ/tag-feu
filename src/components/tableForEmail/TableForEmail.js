@@ -1,6 +1,7 @@
 import React from 'react';
 import { sendMail } from '../../utils/api';
 import { FaPaste } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo }) => {
 
@@ -32,9 +33,9 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
 
         sel.removeAllRanges();
         if(id == "tableHelm"){
-            alert('Tabella helm copiata!')
+            toast.success('Tabella helm copiata!')
         }else{
-            alert('Tabella ocp copiata!')
+            toast.success('Tabella ocp copiata!')
         }
     }
 
@@ -44,37 +45,38 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
 
     return (
         <div>
+            <ToastContainer theme={'dark'}/>
             <div>
                 {hemlTags &&
                     <div>
-                        <table id='tableHelm' style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+                        <table id='tableHelm'>
                             <thead>
                                 <tr>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>ISSUE</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>PROGETTO</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>PIPELINE DI MERGE REQUEST</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>SOURCE REPOSITORY</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>PIPELINE DI RELEASE</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>BUILD DOCKER IMAGE</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>UPSTREAM DEPLOY</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>TAG NAME</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>ATTIVITA' MANUALI</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>NOTE</th>
+                                    <th>ISSUE</th>
+                                    <th >PROGETTO</th>
+                                    <th >PIPELINE DI MERGE REQUEST</th>
+                                    <th >SOURCE REPOSITORY</th>
+                                    <th >PIPELINE DI RELEASE</th>
+                                    <th >BUILD DOCKER IMAGE</th>
+                                    <th >UPSTREAM DEPLOY</th>
+                                    <th >TAG NAME</th>
+                                    <th >ATTIVITA' MANUALI</th>
+                                    <th >NOTE</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {hemlTags && hemlTags.map((item, index) => (
                                     <tr key={index}>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.issues}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.pod}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.pipeLineMergeRequest}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.sourceRepository}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.pipeLineRelease}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.buildDockerImage}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.upstreamDeploy}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.tagNumber}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.manualActivity}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.notes}</td>
+                                        <td >{item.issues}</td>
+                                        <td >{item.pod}</td>
+                                        <td >{item.pipeLineMergeRequest}</td>
+                                        <td >{item.sourceRepository}</td>
+                                        <td >{item.pipeLineRelease}</td>
+                                        <td >{item.buildDockerImage}</td>
+                                        <td >{item.upstreamDeploy}</td>
+                                        <td >{item.tagNumber}</td>
+                                        <td >{item.manualActivity}</td>
+                                        <td >{item.notes}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -85,34 +87,34 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                 }
                 {ocpTags &&
                     <div>
-                        <table id='tableOcp' style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+                        <table id='tableOcp'>
                             <thead>
                                 <tr>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>ISSUE</th>
-                                    <th className='small-td' style={{ border: '1px solid black !important', textAlign: 'center', width: '170px !important' }}>PROGETTO</th>
-                                    <th className='small-td' style={{ border: '1px solid black !important', textAlign: 'center', width: '170px !important' }}>UPSTREAM RELEASE</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>UPSTREAM DEPLOY</th>
-                                    <th className='small-td' style={{ border: '1px solid black !important', textAlign: 'center', width: '170px !important' }}>OVERWRITE DEPLOYMENT CONFIG</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>BUILD DOCKER IMAGE</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>TAG NAME</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>BRANCH CONFIGURATIONS</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>ATTIVITA' MANUALI</th>
-                                    <th style={{ border: '1px solid black !important', textAlign: 'center', backgroundColor: '#f2f2f2', fontSize: 'small', width: '180px !important' }}>NOTE</th>
+                                    <th>ISSUE</th>
+                                    <th className='smaller-td'>PROGETTO</th>
+                                    <th className='smaller-td'>UPSTREAM RELEASE</th>
+                                    <th>UPSTREAM DEPLOY</th>
+                                    <th className='smaller-td'>OVERWRITE DEPLOYMENT CONFIG</th>
+                                    <th>BUILD DOCKER IMAGE</th>
+                                    <th>TAG NAME</th>
+                                    <th>BRANCH CONFIGURATIONS</th>
+                                    <th>ATTIVITA' MANUALI</th>
+                                    <th>NOTE</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {ocpTags && ocpTags.map((item, index) => (
                                     <tr key={index}>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.issues}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '170px !important' }}>{item.pod}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '170px !important' }}>{item.pipeLineMergeRequest}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.sourceRepository}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.pipeLineRelease}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.buildDockerImage}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.upstreamDeploy}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.tagNumber}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.manualActivity}</td>
-                                        <td style={{ border: '1px solid black !important', textAlign: 'center', width: '180px !important' }}>{item.notes}</td>
+                                        <td >{item.issues}</td>
+                                        <td className='smaller-td'>{item.pod}</td>
+                                        <td className='smaller-td'>{item.upstreamRelease}</td>
+                                        <td >{item.upstreamDeploy}</td>
+                                        <td >{item.overwriteDeploymentConfig}</td>
+                                        <td >{item.buildDockerImage}</td>
+                                        <td >{item.tagNumber}</td>
+                                        <td >{item.branchConfigurations}</td>
+                                        <td >{item.manualActivity}</td>
+                                        <td >{item.notes}</td>
                                     </tr>
                                 ))}
                             </tbody>

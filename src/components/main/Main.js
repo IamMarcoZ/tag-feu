@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Table from '../table/Table';
 import { PODLIST, HELM_PODS, OCP_PODS } from "../../utils/CONSTANTS";
 import TableForEmail from '../tableForEmail/TableForEmail';
+import { toast, ToastContainer } from "react-toastify";
 
 
 const Main = () => {
@@ -196,7 +197,7 @@ const Main = () => {
             }
 
         } else {
-            alert(`${tagHelm.pod} è già presente, utilizza il pulsante di modifica`)
+            toast.error(`${tagHelm.pod} è già presente, utilizza il pulsante di modifica`)
         }
     }
 
@@ -283,6 +284,7 @@ const Main = () => {
 
     return (
         <div className='container'>
+            <ToastContainer theme={'dark'}/>
             <div className='row'>
                 {textareaVisible &&
                     <div className='col-12 mt-5'>
