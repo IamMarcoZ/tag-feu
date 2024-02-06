@@ -9,9 +9,9 @@ const AppRouter =() => {
 
         <BrowserRouter>
             <Routes>
-            <Route path="/" element={<RouterLayout />}>
+            <Route path="/tag-feu" element={<RouterLayout />}>
                 <Route index element={<Main />} />
-                <Route path="/issues" element={<Issues />} />
+                <Route path="/tag-feu/issues" element={<Issues />} />
             </Route>
             </Routes>
         </BrowserRouter>

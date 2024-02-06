@@ -10,8 +10,8 @@ const RouterLayout = () => {
     <div>
       <Navbar className="row" bg="dark" data-bs-theme="dark">
         <div className="col-4" >
-          <Link className="col-2" style={{borderBottom:0}} to="/">Home</Link>
-          <Link className="col-2" to="/issues">Issues</Link>
+          <Link className="col-2" style={{borderBottom:0}} to="/tag-feu">Home</Link>
+          <Link className="col-2" to="/tag-feu/issues">Issues</Link>
         </div>
 
       </Navbar>
