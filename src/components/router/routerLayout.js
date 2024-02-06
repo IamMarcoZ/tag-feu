@@ -9,9 +9,13 @@ const RouterLayout = () => {
   return (
     <div>
       <Navbar className="row" bg="dark" data-bs-theme="dark">
-        <div className="col-4" >
-          <Link className="col-2" style={{borderBottom:0}} to="/tag-feu">Home</Link>
-          <Link className="col-2" to="/tag-feu/issues">Issues</Link>
+        <div className="row" >
+          <div className="col-2 max-width-fit route-btn-home route-div">
+            <Link className="route-btn" style={{ borderBottom: 0 }} to="/tag-feu">Home</Link>
+          </div>
+          <div className="col-2 max-width-fit route-div">
+            <Link className="route-btn" to="/tag-feu/issues">Issues</Link>
+          </div>
         </div>
       </Navbar>
       <Outlet />

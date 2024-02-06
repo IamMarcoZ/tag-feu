@@ -105,7 +105,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                             <tbody>
                                 {ocpTags && ocpTags.map((item, index) => (
                                     <tr key={index}>
-                                        <td >{item.issues}</td>
+                                        <td>{item.issues}</td>
                                         <td className='smaller-td'>{item.pod}</td>
                                         <td className='smaller-td'>{item.upstreamRelease}</td>
                                         <td >{item.upstreamDeploy}</td>
