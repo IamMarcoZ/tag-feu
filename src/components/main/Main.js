@@ -3,7 +3,7 @@ import Table from '../table/Table';
 import { PODLIST, HELM_PODS, OCP_PODS } from "../../utils/CONSTANTS";
 import TableForEmail from '../tableForEmail/TableForEmail';
 import { toast, ToastContainer } from "react-toastify";
-
+import './main.css'
 
 const Main = () => {
     const [tagHelmArray, setTagHelmArray] = useState([]);
@@ -225,6 +225,10 @@ const Main = () => {
         return isTagPresent
     }
 
+    function goToTextArea() {
+        setTextAreaVisible(true);
+    }
+
     function textAreaClick() {
         var value = textareaValue;
         let hemlArrayToPush = [];
@@ -303,36 +307,35 @@ const Main = () => {
                         <div className="form-group">
                             <textarea
                                 placeholder='Seguire il seguente pattern:
-                            associazione-ruoli-pf 25106-25105,
+                            associazione-ruoli-pf 1.44.2 25106-25105,
                             frontEnd-carte 25111,
-                            riepilogo-operazione-cdm 25116-25220'
+                            riepilogo-operazione-cdm 1.44.3'
                                 rows="10" cols="50" type="text" value={textareaValue} onChange={(e) => textAreaOnChange(e.target.value)}></textarea>
                         </div>
                         <div>
-                            <button type="button" onClick={textAreaClick} className="btn btn-success mt-3">Aggiungi</button>
+                            <button type="button" onClick={textAreaClick} className="btn btn-success mt-3 add-btn">{textareaValue.length == 0 ? 'Inserimento tramite form' : 'Aggiungi'}</button>
                         </div>
                     </div>
                 }
                 {!textareaVisible &&
                     <div className='row'>
+                        <h3 className='mb-3 text-uppercase'><b>Scegli il tipo di pod</b></h3>
                         <div className='col-12'>
-                            <div><small>Pod Helm</small>
+                            <span className='goback-add-btn text-uppercase'><small><b>Helm</b></small>
                                 <input
                                     type="radio"
                                     value={true}
                                     checked={isHelm}
                                     onChange={() => setIsHelm(true)}
                                     name="podType"
-                                /></div>
-                            <div><small>Pod OCP </small>
+                                /></span><span className='goback-add-btn'><small><b>OCP</b></small>
                                 <input
                                     type="radio"
                                     value={false}
                                     checked={!isHelm}
                                     onChange={() => setIsHelm(false)}
                                     name="podType"
-                                /></div>
-                        </div>
+                                /></span></div>
                     </div>}
                 {!textareaVisible && isHelm &&
                     <><div className='col-4 mt-5'>
@@ -503,15 +506,20 @@ const Main = () => {
                 }
             </div>
 
-            {!textareaVisible && <button type="button" disabled={!allFieldsValued() || !fieldsValidation()} onClick={() => handleSubmit()} className="btn btn-success mt-3">Aggiungi</button>}
-            <div className='container'>
-                <div>
-                    {!riepilogoVisibile && <>
-                        <Table hemlArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e copia le tabelle</button></>
-                    }
-                    <TableForEmail hemlTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} />
-                </div>
-            </div>
+            {!textareaVisible &&
+                <><div className='row'>
+                    <div className='col-12'>
+                        <button type="button" onClick={() => goToTextArea()} className="btn btn-success mt-3 goback-add-btn">Indietro</button>
+                        <button type="button" disabled={!allFieldsValued() || !fieldsValidation()} onClick={() => handleSubmit()} className="btn btn-success mt-3 goback-add-btn">Aggiungi</button>
+                    </div>
+                </div><div className='container'>
+                        <div>
+                            {!riepilogoVisibile && <>
+                                <Table hemlArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e copia le tabelle</button></>}
+                            <TableForEmail hemlTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} />
+                        </div>
+                    </div></>
+            }
         </div>
     )
 }

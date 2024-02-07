@@ -80,7 +80,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                                 ))}
                             </tbody>
                         </table>
-                        <button type='button' onClick={() => copyToClipBoard("tableHelm")} ><FaPaste />
+                        <button className="btn btn-danger" type='button' onClick={() => copyToClipBoard("tableHelm")} >Copia
                         </button>
                     </div>
                 }
@@ -117,12 +117,12 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                                     </tr>
                                 ))}
                             </tbody>
-                        </table><button type='button' onClick={() => copyToClipBoard("tableOcp")} ><FaPaste />
+                        </table><button className="btn btn-danger" disabled={Object.keys(ocpTags).length == 0} type='button' onClick={() => copyToClipBoard("tableOcp")} >Copia
                         </button>
                     </div>
                 }
 
-                <button className='btn btn-success' onClick={handleCloseRiepilogo}>
+                <button className='btn btn-success mt-5' onClick={handleCloseRiepilogo}>
                     Chiudi
                 </button>
             </div>

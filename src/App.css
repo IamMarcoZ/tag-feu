@@ -1,13 +1,20 @@
-.App {
-  text-align: center;
-  background-image: url('../public/page-turner.png') ;
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center; 
-  height: 100vh;
-  width: 100% !important;
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../public/page-turner.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
+.App {
+  text-align: center;
+  background-color: transparent; /* Trasparente */
+  height: 100vh; /* Altezza al 100% della viewport */
+  width: 100%;
+  position: relative; /* Posizione relativa per allineare i contenuti al centro */
+  z-index: 1; /* Per essere sopra lo sfondo del body */
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
