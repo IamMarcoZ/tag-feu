@@ -1,5 +1,4 @@
 import React from 'react';
-import { sendMail } from '../../utils/api';
 import { FaPaste } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
