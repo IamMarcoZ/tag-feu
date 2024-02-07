@@ -217,6 +217,14 @@ const Main = () => {
         setTextAreaValue(value);
     }
 
+    function isTagPresentInTextArea(tag) {
+        let isTagPresent = false;
+        if ((/^\d\.\d{2}\.\d{1,3}$/).test(tag)) {
+            isTagPresent = true;
+        }
+        return isTagPresent
+    }
+
     function textAreaClick() {
         var value = textareaValue;
         let hemlArrayToPush = [];
@@ -231,8 +239,10 @@ const Main = () => {
                 if (checkIfPodIsHeml(tmpObj.pod)) {
                     let tmpHelm = {
                         ...tmpObj,
-                        issues: el.split(" ")[2] ? el.split(" ")[2] : "",
-                        tagNumber: el.split(" ")[1] ? el.split(" ")[1] : ""
+                        tagNumber: isTagPresentInTextArea(el.split(" ")[1]) ? el.split(" ")[1] : "",
+                        issues: isTagPresentInTextArea(el.split(" ")[1]) ?
+                            (el.split(" ")[2] ? el.split(" ")[2] : "") :
+                            el.split(" ")[1]
                     }
                     let helmFound = HELM_PODS.find((pod) => pod.pod.toLowerCase() === tmpHelm.pod.toLowerCase())
                     let item = {
@@ -252,8 +262,10 @@ const Main = () => {
                 } else {
                     let tmpOcp = {
                         ...tmpObj,
-                        issues: el.split(" ")[2] ? el.split(" ")[2] : "",
-                        tagNumber: el.split(" ")[1] ? el.split(" ")[1] : ""
+                        tagNumber: isTagPresentInTextArea(el.split(" ")[1]) ? el.split(" ")[1] : "",
+                        issues: isTagPresentInTextArea(el.split(" ")[1]) ?
+                            (el.split(" ")[2] ? el.split(" ")[2] : "") :
+                            el.split(" ")[1],
                     }
                     let ocpFound = OCP_PODS.find((pod) => pod.pod.toLowerCase() === tmpOcp.pod.toLowerCase());
                     let item = {
@@ -284,7 +296,7 @@ const Main = () => {
 
     return (
         <div className='container'>
-            <ToastContainer theme={'dark'}/>
+            <ToastContainer theme={'dark'} />
             <div className='row'>
                 {textareaVisible &&
                     <div className='col-12 mt-5'>
@@ -495,7 +507,7 @@ const Main = () => {
             <div className='container'>
                 <div>
                     {!riepilogoVisibile && <>
-                        <Table hemlArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e invia la mail</button></>
+                        <Table hemlArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e copia le tabelle</button></>
                     }
                     <TableForEmail hemlTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} />
                 </div>
