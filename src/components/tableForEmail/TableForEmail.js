@@ -75,7 +75,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                                         <td >{item.upstreamDeploy}</td>
                                         <td >{item.tagNumber}</td>
                                         <td >{item.manualActivity}</td>
-                                        <td >{item.notes}</td>
+                                        <td>{item.notes !== '' ? item.notes : '\u00A0'}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -113,7 +113,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                                         <td >{item.tagNumber}</td>
                                         <td >{item.branchConfigurations}</td>
                                         <td >{item.manualActivity}</td>
-                                        <td >{item.notes}</td>
+                                        <td>{item.notes !== '' ? item.notes : '\u00A0'}</td>
                                     </tr>
                                 ))}
                             </tbody>

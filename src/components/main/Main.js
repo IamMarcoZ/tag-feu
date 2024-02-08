@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Table from '../table/Table';
 import { PODLIST, HELM_PODS, OCP_PODS } from "../../utils/CONSTANTS";
 import TableForEmail from '../tableForEmail/TableForEmail';
@@ -22,7 +22,7 @@ const Main = () => {
         upstreamDeploy: "",
         tagNumber: "",
         manualActivity: "NO",
-        notes: "",
+        notes: " ",
         inputEnabled: false
     });
     const [tagOcp, setTagOcp] = useState({
@@ -35,9 +35,17 @@ const Main = () => {
         tagNumber: "",
         branchConfigurations: "release/",
         manualActivity: "NO",
-        notes: "",
+        notes: " ",
         inputEnabled: false
     });
+
+    useEffect(() => {
+
+      return () => {
+        recoverSession()
+      }
+    }, [])
+    
 
     const HELM_POD_NAMES = HELM_PODS.map(el => el.pod);
     const HELM_SOURCE_REPO = HELM_PODS.map(el => el.sourceRepository);
@@ -46,6 +54,13 @@ const Main = () => {
     const OCP_POD_NAMES = OCP_PODS.map(el => el.pod);
     const OCP_UPSTREAM_RELEASE = OCP_PODS.map(el => el.upstreamRelease);
     const OCP_UPSTREAM_DEPLOY = OCP_PODS.map(el => el.upstreamDeploy);
+
+    function recoverSession(){
+        var sessionTextArea = sessionStorage.getItem('textAreaIssues');
+        if(sessionTextArea && sessionTextArea.length > 0){
+            setTextAreaValue(sessionTextArea);
+        }
+    }
 
     function allFieldsValued() {
 
@@ -215,6 +230,7 @@ const Main = () => {
 
     function textAreaOnChange(value) {
         setTextAreaValue(value);
+        sessionStorage.setItem("textAreaIssues",value)
     }
 
     function isTagPresentInTextArea(tag) {
