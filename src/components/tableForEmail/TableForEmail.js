@@ -2,7 +2,7 @@ import React from 'react';
 import { FaPaste } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
-const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo }) => {
+const TableForEmail = ({ helmTags, ocpTags, riepilogoVisibile, closeRiepilogo }) => {
 
     function handleCloseRiepilogo() {
         closeRiepilogo();
@@ -46,7 +46,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
         <div>
             <ToastContainer theme={'dark'}/>
             <div>
-                {hemlTags &&
+                {Object.keys(helmTags).length > 0 &&
                     <div>
                         <table id='tableHelm'>
                             <thead>
@@ -64,7 +64,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                                 </tr>
                             </thead>
                             <tbody>
-                                {hemlTags && hemlTags.map((item, index) => (
+                                {helmTags && helmTags.map((item, index) => (
                                     <tr key={index}>
                                         <td >{item.issues}</td>
                                         <td >{item.pod}</td>
@@ -84,7 +84,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                         </button>
                     </div>
                 }
-                {ocpTags &&
+                {Object.keys(ocpTags).length > 0 &&
                     <div>
                         <table id='tableOcp'>
                             <thead>
@@ -117,7 +117,7 @@ const TableForEmail = ({ hemlTags, ocpTags, riepilogoVisibile, closeRiepilogo })
                                     </tr>
                                 ))}
                             </tbody>
-                        </table><button className="btn btn-danger" disabled={Object.keys(ocpTags).length == 0} type='button' onClick={() => copyToClipBoard("tableOcp")} >Copia
+                        </table><button className="btn btn-danger" type='button' onClick={() => copyToClipBoard("tableOcp")} >Copia
                         </button>
                     </div>
                 }

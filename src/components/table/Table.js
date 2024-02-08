@@ -5,14 +5,14 @@ import { ImBin2 } from "react-icons/im";
 import { MdCancel } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 
-const Table = ({ hemlArray, ocpArray, removeFn, modifyTagCb }) => {
+const Table = ({ helmArray, ocpArray, removeFn, modifyTagCb }) => {
     const [helmFromParent, setHelmFromParent] = useState(null);
     const [ocpFromParent, setOcpFromParent] = useState(null);
 
     useEffect(() => {
-        setHelmFromParent(hemlArray);
+        setHelmFromParent(helmArray);
         setOcpFromParent(ocpArray);
-    }, [hemlArray, ocpArray])
+    }, [helmArray, ocpArray])
 
     function updateLine(idx, isHelm) {
         if (isHelm) {

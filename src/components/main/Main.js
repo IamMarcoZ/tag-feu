@@ -3,6 +3,8 @@ import Table from '../table/Table';
 import { PODLIST, HELM_PODS, OCP_PODS } from "../../utils/CONSTANTS";
 import TableForEmail from '../tableForEmail/TableForEmail';
 import { toast, ToastContainer } from "react-toastify";
+import { Tooltip } from 'react-tooltip'
+
 import './main.css'
 
 const Main = () => {
@@ -125,7 +127,7 @@ const Main = () => {
         }
     }
 
-    function checkIfPodIsHeml(pod) {
+    function checkIfPodIshelm(pod) {
         pod = pod.toLowerCase();
         var helm = HELM_POD_NAMES.includes(pod) ? true : false;
         return helm;
@@ -247,16 +249,17 @@ const Main = () => {
 
     function textAreaClick() {
         var value = textareaValue;
-        let hemlArrayToPush = [];
+        var valid = true;
+        let helmArrayToPush = [];
         let ocpArrayToPush = [];
         if (value) {
             var arr = value.split(",");
-            arr.forEach((el) => {
+            arr.forEach((el,index) => {
                 el = el.trim().replace(/^(?:\n)+/, '');
                 let tmpObj = {
                     pod: el.split(" ")[0] ? el.split(" ")[0] : "",
                 }
-                if (checkIfPodIsHeml(tmpObj.pod)) {
+                if (checkIfPodIshelm(tmpObj.pod)) {
                     let tmpHelm = {
                         ...tmpObj,
                         tagNumber: isTagPresentInTextArea(el.split(" ")[1]) ? el.split(" ")[1] : "",
@@ -278,40 +281,51 @@ const Main = () => {
                         notes: "",
                         inputEnabled: false
                     };
-                    hemlArrayToPush.push(item);
+                    helmArrayToPush.push(item);
                 } else {
-                    let tmpOcp = {
-                        ...tmpObj,
-                        tagNumber: isTagPresentInTextArea(el.split(" ")[1]) ? el.split(" ")[1] : "",
-                        issues: isTagPresentInTextArea(el.split(" ")[1]) ?
-                            (el.split(" ")[2] ? el.split(" ")[2] : "") :
-                            el.split(" ")[1],
+
+                    if(OCP_POD_NAMES.includes(tmpObj.pod)){
+                        let tmpOcp = {
+                            ...tmpObj,
+                            tagNumber: isTagPresentInTextArea(el.split(" ")[1]) ? el.split(" ")[1] : "",
+                            issues: isTagPresentInTextArea(el.split(" ")[1]) ?
+                                (el.split(" ")[2] ? el.split(" ")[2] : "") :
+                                el.split(" ")[1],
+                        }
+                        let ocpFound = OCP_PODS.find((pod) => pod.pod.toLowerCase() === tmpOcp.pod.toLowerCase());
+                        let item = {
+                            issues: tmpOcp.issues,
+                            pod: tmpOcp.pod,
+                            upstreamRelease: ocpFound.upstreamRelease ? ocpFound.upstreamRelease : "",
+                            upstreamDeploy: ocpFound.upstreamDeploy ? ocpFound.upstreamDeploy : "",
+                            overwriteDeploymentConfig: "SI",
+                            buildDockerImage: "",
+                            tagNumber: tmpOcp.tagNumber,
+                            branchConfigurations: "NO",
+                            manualActivity: "NO",
+                            notes: "",
+                            inputEnabled: false,
+                        };
+                        ocpArrayToPush.push(item);
+                    }else{
+                        valid = false;
+                        toast.error(`${tmpObj.pod}
+                         non è presente
+                          nella lista dei pod`)
                     }
-                    let ocpFound = OCP_PODS.find((pod) => pod.pod.toLowerCase() === tmpOcp.pod.toLowerCase());
-                    let item = {
-                        issues: tmpOcp.issues,
-                        pod: tmpOcp.pod,
-                        upstreamRelease: ocpFound.upstreamRelease ? ocpFound.upstreamRelease : "",
-                        upstreamDeploy: ocpFound.upstreamDeploy ? ocpFound.upstreamDeploy : "",
-                        overwriteDeploymentConfig: "SI",
-                        buildDockerImage: "",
-                        tagNumber: tmpOcp.tagNumber,
-                        branchConfigurations: "NO",
-                        manualActivity: "NO",
-                        notes: "",
-                        inputEnabled: false,
-                    };
-                    ocpArrayToPush.push(item);
+                    
                 }
             })
         }
-        if (hemlArrayToPush) {
-            setTagHelmArray(hemlArrayToPush);
-        }
-        if (ocpArrayToPush) {
-            setTagOcpArray(ocpArrayToPush);
-        }
-        setTextAreaVisible(false);
+        if(valid){
+            if (helmArrayToPush) {
+                setTagHelmArray(helmArrayToPush);
+            }
+            if (ocpArrayToPush) {
+                setTagOcpArray(ocpArrayToPush);
+            }
+            setTextAreaVisible(false);
+        } 
     }
 
     return (
@@ -321,7 +335,13 @@ const Main = () => {
                 {textareaVisible &&
                     <div className='col-12 mt-5'>
                         <div className="form-group">
+                            <Tooltip id="my-tooltip" />
                             <textarea
+                            data-tooltip-place="right"
+                            data-tooltip-variant='light'
+                            data-tooltip-id="my-tooltip" 
+                            data-tooltip-content="E' possibile aggiungere pod senza issues o senza tag e modificare successivamente nella tabella.
+                            Separare i pod da virgola"
                                 placeholder='Seguire il seguente pattern:
                             associazione-ruoli-pf 1.44.2 25106-25105,
                             frontEnd-carte 25111,
@@ -531,8 +551,8 @@ const Main = () => {
                 </div><div className='container'>
                         <div>
                             {!riepilogoVisibile && <>
-                                <Table hemlArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e copia le tabelle</button></>}
-                            <TableForEmail hemlTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} />
+                                <Table helmArray={tagHelmArray} ocpArray={tagOcpArray} removeFn={handleRemove} modifyTagCb={handleSetTagItems} /><button type="button" onClick={showRiepilogo} className="btn btn-success mt-3">Guarda il riepilogo e copia le tabelle</button></>}
+                            <TableForEmail helmTags={tagHelmArray} ocpTags={tagOcpArray} riepilogoVisibile={riepilogoVisibile} closeRiepilogo={closeRiepilogo} />
                         </div>
                     </div></>
             }
