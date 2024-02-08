@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '../table/Table';
 import { PODLIST, HELM_PODS, OCP_PODS } from "../../utils/CONSTANTS";
 import TableForEmail from '../tableForEmail/TableForEmail';
@@ -43,11 +43,10 @@ const Main = () => {
 
     useEffect(() => {
 
-      return () => {
         recoverSession()
-      }
+
     }, [])
-    
+
 
     const HELM_POD_NAMES = HELM_PODS.map(el => el.pod);
     const HELM_SOURCE_REPO = HELM_PODS.map(el => el.sourceRepository);
@@ -57,9 +56,9 @@ const Main = () => {
     const OCP_UPSTREAM_RELEASE = OCP_PODS.map(el => el.upstreamRelease);
     const OCP_UPSTREAM_DEPLOY = OCP_PODS.map(el => el.upstreamDeploy);
 
-    function recoverSession(){
+    function recoverSession() {
         var sessionTextArea = sessionStorage.getItem('textAreaIssues');
-        if(sessionTextArea && sessionTextArea.length > 0){
+        if (sessionTextArea && sessionTextArea.length > 0) {
             setTextAreaValue(sessionTextArea);
         }
     }
@@ -232,7 +231,7 @@ const Main = () => {
 
     function textAreaOnChange(value) {
         setTextAreaValue(value);
-        sessionStorage.setItem("textAreaIssues",value)
+        sessionStorage.setItem("textAreaIssues", value)
     }
 
     function isTagPresentInTextArea(tag) {
@@ -254,7 +253,7 @@ const Main = () => {
         let ocpArrayToPush = [];
         if (value) {
             var arr = value.split(",");
-            arr.forEach((el,index) => {
+            arr.forEach((el, index) => {
                 el = el.trim().replace(/^(?:\n)+/, '');
                 let tmpObj = {
                     pod: el.split(" ")[0] ? el.split(" ")[0] : "",
@@ -284,7 +283,7 @@ const Main = () => {
                     helmArrayToPush.push(item);
                 } else {
 
-                    if(OCP_POD_NAMES.includes(tmpObj.pod)){
+                    if (OCP_POD_NAMES.includes(tmpObj.pod)) {
                         let tmpOcp = {
                             ...tmpObj,
                             tagNumber: isTagPresentInTextArea(el.split(" ")[1]) ? el.split(" ")[1] : "",
@@ -307,17 +306,17 @@ const Main = () => {
                             inputEnabled: false,
                         };
                         ocpArrayToPush.push(item);
-                    }else{
+                    } else {
                         valid = false;
                         toast.error(`${tmpObj.pod}
                          non è presente
                           nella lista dei pod`)
                     }
-                    
+
                 }
             })
         }
-        if(valid){
+        if (valid) {
             if (helmArrayToPush) {
                 setTagHelmArray(helmArrayToPush);
             }
@@ -325,7 +324,7 @@ const Main = () => {
                 setTagOcpArray(ocpArrayToPush);
             }
             setTextAreaVisible(false);
-        } 
+        }
     }
 
     return (
@@ -337,10 +336,10 @@ const Main = () => {
                         <div className="form-group">
                             <Tooltip id="my-tooltip" />
                             <textarea
-                            data-tooltip-place="right"
-                            data-tooltip-variant='light'
-                            data-tooltip-id="my-tooltip" 
-                            data-tooltip-content="E' possibile aggiungere pod senza issues o senza tag e modificare successivamente nella tabella.
+                                data-tooltip-place="right"
+                                data-tooltip-variant='light'
+                                data-tooltip-id="my-tooltip"
+                                data-tooltip-content="È possibile aggiungere pod senza issues o senza tag e modificare successivamente nella tabella.
                             Separare i pod da virgola"
                                 placeholder='Seguire il seguente pattern:
                             associazione-ruoli-pf 1.44.2 25106-25105,
