@@ -32,7 +32,7 @@ const AddIssueRow = ({ env, releaseNumber, issues, docId, document}) => {
             let releasePath = env+"."+releaseNumber.replace('.','_');
             updateDoc(docRef, { [releasePath]: releaseSessions}, docId).then(
                 (response) => {
-                    alert(`Aggiunta issue ${issueNumber} su ${pod}`)
+                    toast.success(`Aggiunta issue ${issueNumber} su ${pod}`)
                 }
             );
             

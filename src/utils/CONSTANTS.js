@@ -4,7 +4,7 @@ export const PODLIST = [
 "contrattualizzazione",
 "configurazione-prodotto-ccretail-cdm",
 "attivazione-ccretail-cdm",
-"feu-catalogo",
+"feu-catalog",
 "feuhomepage",
 "dematerialization-service",
 "registrazione-oad",
