@@ -70,7 +70,7 @@ const Table = ({ helmArray, ocpArray, removeFn, modifyTagCb }) => {
     }
 
     return (
-        <div className='container'>
+        <div id='showTable' className='container'>
             <table>
                 <thead>
                     <tr>

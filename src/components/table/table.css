@@ -1,32 +1,32 @@
-table {
+#showTable table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-th, td {
+#showTable th, td {
     border: 1px solid black !important;
     text-align: center;
 }
 
-th {
+#showTable th {
     background-color: #DDEBF7;
     font-size: small;
     max-width: 150px !important;
 }
 
-td{
+#showTable td{
     width: 180px !important;
 }
 
-.td-btn{
+#showTable .td-btn{
     width: 50px !important;
 }
 
-.small-td {
+#showTable .small-td {
     width: 170px !important;
 }
 
-.small-input{
+#showTable .small-input{
     width: 100% !important;
 }
